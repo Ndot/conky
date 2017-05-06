@@ -7,7 +7,7 @@ conky.config = {
     gap_x = 0,
     gap_y = 0,
     maximum_width = 1900,
-    minimum_width = 600,
+    minimum_width = 380,
     minimum_height = 1000,
     own_window = true,
     own_window_hints = 'undecorated,below,sticky',
@@ -28,13 +28,13 @@ conky.config = {
     
     ----------------------------------------------------------------- COLORS
     default_color = 'ffffff',   -- White
-    color1 = '808080',          -- Grey
-    color2 = 'c4c4c4',          -- Light Grey
-    color3 = '333333',          -- Dark Grey
-    color4 = '336338',          -- Green
-    color5 = '5ac0ff',          -- Blue
-    color6 = '215924',          -- DarkGreen
-    color7 = 'FF6600'           -- Orange
+    color1 = '#808080',          -- Grey
+    color2 = '#c4c4c4',          -- Light Grey
+    color3 = '#333333',          -- Dark Grey
+    color4 = '#2e935d',          -- Green
+    color5 = '#5ac0ff',          -- Blue
+    color6 = '#215924',          -- DarkGreen
+    color7 = '#FF6600'           -- Orange
 }
 
 conky.text = [[
@@ -55,10 +55,10 @@ ${voffset 294}
 ${goto 190}${color7}CPU 
 
 ${voffset -118}
-${color1}${goto 177}${font :size=6}${freq_g 1}${voffset 6}
-${color1}${goto 177}${font :size=6}${freq_g 2}${voffset 6}
-${color1}${goto 177}${font :size=6}${freq_g 3}${voffset 6}
-${color1}${goto 177}${font :size=6}${freq_g 4}
+${color2}${goto 177}${font :size=6}${freq_g 1}${voffset 6}
+${color2}${goto 177}${font :size=6}${freq_g 2}${voffset 6}
+${color2}${goto 177}${font :size=6}${freq_g 3}${voffset 6}
+${color2}${goto 177}${font :size=6}${freq_g 4}
 
 #------------------------------------------------------------------------------ MEMORY
 #

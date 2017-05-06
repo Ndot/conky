@@ -165,6 +165,12 @@ function setup_rings(cr, obj)
     if obj['name'] == '' then setup_draw_ring(cr, 0, obj); return end -- For decorative rings
     
     local value   = tonumber(conky_parse(string.format('${%s %s}', obj['name'], obj['arg'])))
+    
+    -- The first time 'conky_parse' is called for each 'exec' command the return value is nill.
+    -- The bellow if statement avoids the script to exit on each of those calls.
+    -- This avoids conky to draw the rings in steps.
+    if value == nil then value = 0 end
+    
     local val_dec = value / obj['max']
     
     setup_draw_ring(cr, val_dec, obj)

@@ -245,7 +245,7 @@ rings = {
     ------------------------------------------------------------ DISK
     {
         name        = 'fs_used_perc',
-        arg         = '/media/Main/',
+        arg         = '/media/MAIN/',
         max         = 100,
         bg_color    = { '#555555', 0.2 },
         fg_color    = { '#f40d0d', 0.2 },
@@ -284,7 +284,7 @@ rings = {
         bg_color    = { '#555555', 0.4 },
         fg_color    = nil,
         range_value = { 0, 50, 70 },
-        range_color = { { '#a7ac2a', 0.5 }, { '#ff8000', 0.5 }, { '#ff0000', 0.5 } },
+        range_color = { { '#a7ac2a', 0.7 }, { '#ff8000', 0.7 }, { '#ff0000', 0.7 } },
         x           = sys02_x,
         y           = sys02_y,
         radius      = 90,
@@ -365,6 +365,6 @@ clock_hands = {
     seconds_thickness   = 2,
     -- Show seconds TRUE / FALSE
     show_seconds        = true,
-    color               = { '#832e2e', 1 },
+    color               = { '#564037', 1 },
     line_cap            = CAIRO_LINE_CAP_BUTT
 }
