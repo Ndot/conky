@@ -226,7 +226,7 @@ function lines_from(file)
 end
 
 ---
--- Setup the clock hands.
+-- Setup to print the text files.
 --
 -- @param {} cr         - Surface to draw. (cr = cairo_create(cs) -> this creates the surface to draw).
 -- @param {Object} obj  - One object with the settings for the text file.
