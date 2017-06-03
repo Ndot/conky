@@ -176,6 +176,85 @@ function setup_rings(cr, obj)
     setup_draw_ring(cr, val_dec, obj)
 end
 
+
+
+---
+-- Print text on the Conky window.
+--
+-- @param {} cr                 - Surface to draw. (cr = cairo_create(cs) -> this creates the surface to draw).
+-- @param {string} text          - The text to write.
+-- @param {array} text_color    - An array with color and alpha (eg: { '#bbaa88', 0.4 }).
+-- @param {number} text_size    - Font size.
+-- @param {string} text_font    - Font family.
+-- @param {number} x            - X position.
+-- @param {number} y            - Y position.
+--
+function print_text(cr, text, text_color, text_size, text_font, x, y)
+
+    cairo_select_font_face(cr, text_font, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
+    cairo_set_source_rgb(cr, rgb_to_r_g_b(text_color));
+    cairo_set_font_size(cr, text_size);
+
+    cairo_move_to(cr, x, y);
+    cairo_show_text(cr, text);
+end
+
+---
+-- Check to see if the file exists.
+--
+-- @param {string}   - File path.
+-- @return {boolean} - True = file exists || False = file does NOT exist.
+--
+function file_exists(file)
+    local file_check = io.open(file, "r")
+    if file_check then file_check:close() end
+    return file_check ~= nil
+end
+
+---
+-- Read all lines in file and return a table with lines.
+--
+-- @param {string} - File path.
+-- @return {table} - Table with all the lines in the file.
+--
+function lines_from(file)
+    local lines = {}
+    for line in io.lines(file) do
+        lines[#lines + 1] = line
+    end
+    return lines
+end
+
+---
+-- Setup the clock hands.
+--
+-- @param {} cr         - Surface to draw. (cr = cairo_create(cs) -> this creates the surface to draw).
+-- @param {Object} obj  - One object with the settings for the text file.
+--
+function setup_text(cr, obj)
+    local x, y, file_lines, i = obj['x'], obj['y'], lines_from(obj['path']), 1
+
+    -- For different title size and color.
+    if obj['title_size'] and obj['title_color'] then
+
+        print_text(cr, file_lines[1], obj['title_color'], obj['title_size'], obj['font_family'], x, y)
+
+        y = y + obj['title_size']
+        i = i + 1
+    end
+
+    -- For everything else
+    while table.getn(file_lines) >= i do
+
+        print_text(cr, file_lines[i], obj['body_color'], obj['body_size'], obj['font_family'], x, y)
+
+        y = y + obj['body_size'] + 5 -- Extra 5 pixels so we have a good separation between the lines.
+        i = i + 1
+    end
+end
+
+
+
 ---
 -- Main function this is the function called by conky.
 -- To call the function in conky: "lua_draw_hook_pre = 'conky_main'"
@@ -195,8 +274,19 @@ function conky_main()
     local update_num = tonumber(conky_parse('${updates}'))
 
     if update_num > 5 then
+
+        -- Init for Rings.
         for i in pairs(rings) do
             setup_rings(cr, rings[i])
+        end
+
+        -- Init for Text files.
+        if text then
+            for i in pairs(text) do
+                if file_exists(text[i]['path']) then
+                    setup_text(cr, text[i])
+                end
+            end
         end
     end
 

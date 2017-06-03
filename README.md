@@ -1,8 +1,8 @@
 # Conky
-This is a simple Conky done with `Lua` and `Bash`.
+Simple Conky done with `Lua` and `Bash`.
 
 ### Screenshot
-![screenshot](img/screenshots/screenshot_01.png)
+![screenshot](img/screenshots/screenshot_01.jpg)
 
 ### Usage
 Simply run the `start_conky.sh` file.
@@ -16,6 +16,7 @@ To do so you can change the variables values on the rings Object, add new Object
 All the key value pairs are explain on the table below.
 
 # Configuration Settings
+##### Rings
 Variable | Explanation
 :--------: | -----------
 name | Name is the command to be executed by conky. This can also be a empty string for decorative rings.
@@ -34,6 +35,18 @@ end_angle | End angle of the arc in degrees.
 gap_percent | This goes from 0 to 1 and it indicates how much of one unit/section out of the max should be drawn. The higher the value the smaller the section of the arc. If this value is 0 (zero) the arc will have no sections.
 line_cap | The way the line cap is drawn. Possible values are `CAIRO_LINE_CAP_BUTT`, `CAIRO_LINE_CAP_ROUND` or `CAIRO_LINE_CAP_SQUARE`.
 
+
+##### Text File
+Variable | Explanation
+:--------: | -----------
+path | Path to the text file.
+font_family | Font family.
+title_size | Font size for the title, if omitted, body size will be used.
+title_color | Color for the title, if omitted, body color will be used.
+body_size | Font size for the body.
+body_color | Color for the body.
+x | The horizontal coordinate in pixels.
+y | The vertical coordinate in pixels
 
 ### Credit Where Credit is Due
 Some ideas for the Lua script came from the Clock Rings script from despot77.
