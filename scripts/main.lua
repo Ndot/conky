@@ -1,5 +1,5 @@
 require 'cairo'
-require 'lua_settings'
+dofile('../settings/settings.lua')
 
 ---
 -- Convert #ffffff colors to rgba(1,1,1,1).
@@ -26,12 +26,12 @@ end
 -- @param {number} radius       - Radius of the ring.
 -- @param {number} start_angle  - Starting angle of the ring.
 -- @param {number} end_angle    - Ending angle of the ring.
--- 
+--
 function draw_ring(cr, obj, color, center_x, center_y, radius, start_angle, end_angle)
     -- Rotate angle by -90 deg
     start_angle = start_angle - math.pi / 2
     end_angle = end_angle - math.pi / 2
-    
+
     cairo_arc(cr, center_x, center_y, radius, start_angle, end_angle)
     cairo_set_source_rgba(cr, rgb_to_r_g_b(color))
     cairo_set_line_width(cr, obj['thickness'])
@@ -39,7 +39,7 @@ function draw_ring(cr, obj, color, center_x, center_y, radius, start_angle, end_
     cairo_stroke(cr)
 end
 
---- 
+---
 -- Setup draw the rings
 --
 -- @param {} cr                     - Surface to draw. (cr = cairo_create(cs) -> this creates the surface to draw).
@@ -47,16 +47,16 @@ end
 -- @param {Object} obj              - One object with the settings of the ring.
 --
 function setup_draw_ring(cr, indicator_value, obj)
-    
+
     -- Convert radians to degrees
     local start_angle   = obj['start_angle'] * (2 * math.pi / 360)
     local end_angle     = obj['end_angle'] * (2 * math.pi / 360)
     local indicator     = indicator_value * (end_angle - start_angle)
-    
+
     -- To change indicator color depending on the range value
     if obj['range_value'] ~= nil then
         local i, indicator = 1, indicator_value * obj['max']
-        
+
         while i <= table.getn(obj['range_value']) do
             if indicator >= obj['range_value'][i] and indicator < obj['max'] then
                 obj['fg_color'] = obj['range_color'][i]
@@ -64,7 +64,7 @@ function setup_draw_ring(cr, indicator_value, obj)
             i = i + 1
         end
     end
-    
+
     -- For the rings that are divided into sections
     if obj['gap_percent'] > 0 then
         local i = 1
@@ -72,11 +72,11 @@ function setup_draw_ring(cr, indicator_value, obj)
         local start_section = start_angle                                   -- The first value is the same as start_angle
         local end_section = start_section + unit * (1 - obj['gap_percent']) -- The start_section plus one unit minus the gap percentage
         local indicator = indicator_value * obj['max']                      -- To get a value from 0 to 100 instead of 0 to 1
-        
+
         while i <= obj['max'] do
             -- Draw each one of the sections for the background
             draw_ring(cr, obj, obj['bg_color'], obj['x'], obj['y'], obj['radius'], start_section, end_section)
-            
+
             if i <= indicator then
                 -- Draw each one of the sections for the indicator
                 draw_ring(cr, obj, obj['fg_color'], obj['x'], obj['y'], obj['radius'], start_section, end_section)
@@ -87,7 +87,7 @@ function setup_draw_ring(cr, indicator_value, obj)
         end
         return
     end
-    
+
     -- Draw background ring AND indicator ring
     draw_ring(cr, obj, obj['bg_color'], obj['x'], obj['y'], obj['radius'], start_angle, end_angle)
     draw_ring(cr, obj, obj['fg_color'], obj['x'], obj['y'], obj['radius'], start_angle, start_angle + indicator)
@@ -101,7 +101,7 @@ end
 -- @param {array} e                 - X and Y end position.
 -- @param {Object} obj              - Object with the settings for the line.
 -- @param {number} line_thickness   - Thickness of the line.
--- 
+--
 function draw_line(cr, s, e, obj, line_thickness)
     cairo_set_line_width(cr, line_thickness)
     cairo_set_line_cap(cr, obj['line_cap'])
@@ -119,38 +119,38 @@ end
 --
 function setup_clock_hands(cr, obj)
     local secs, mins, hours, secs_arc, mins_arc, hours_arc, x_start, x_end, y_start, y_end
-    
-    secs  = os.date("%S")    
+
+    secs  = os.date("%S")
     mins  = os.date("%M")
     hours = os.date("%I")
-    
+
     secs_arc  = (2 * math.pi / 60) * secs
     mins_arc  = (2 * math.pi / 60) * mins + secs_arc / 60
     hours_arc = (2 * math.pi / 12) * hours + mins_arc / 12
-    
+
     -- Draw hours hand
     x_start = obj['x'] + obj['hours_offset'] * math.sin(hours_arc)
     y_start = obj['y'] - obj['hours_offset'] * math.cos(hours_arc)
     x_end   = obj['x'] + obj['hours_width'] * math.sin(hours_arc)
     y_end   = obj['y'] - obj['hours_width'] * math.cos(hours_arc)
-    
+
     draw_line(cr, {x_start, y_start}, {x_end, y_end}, obj, obj['hours_thickness'])
-    
+
     -- Draw minutes hand
     x_start = obj['x'] + obj['minutes_offset'] * math.sin(mins_arc)
     y_start = obj['y'] - obj['minutes_offset'] * math.cos(mins_arc)
     x_end   = obj['x'] + obj['minutes_width'] * math.sin(mins_arc)
     y_end   = obj['y'] - obj['minutes_width'] * math.cos(mins_arc)
-    
+
     draw_line(cr, {x_start, y_start}, {x_end, y_end}, obj, obj['minutes_thickness'])
-    
+
     -- Draw seconds hand
     if obj['show_seconds'] then
         x_start = obj['x'] + obj['seconds_offset'] * math.sin(secs_arc)
         y_start = obj['y'] - obj['seconds_offset'] * math.cos(secs_arc)
         x_end   = obj['x'] + obj['seconds_width'] * math.sin(secs_arc)
         y_end   = obj['y'] - obj['seconds_width'] * math.cos(secs_arc)
-        
+
         draw_line(cr, {x_start, y_start}, {x_end, y_end}, obj, obj['seconds_thickness'])
     end
 end
@@ -163,16 +163,16 @@ end
 --
 function setup_rings(cr, obj)
     if obj['name'] == '' then setup_draw_ring(cr, 0, obj); return end -- For decorative rings
-    
+
     local value   = tonumber(conky_parse(string.format('${%s %s}', obj['name'], obj['arg'])))
-    
+
     -- The first time 'conky_parse' is called for each 'exec' command the return value is nill.
     -- The bellow if statement avoids the script to exit on each of those calls.
     -- This avoids conky to draw the rings in steps.
     if value == nil then value = 0 end
-    
+
     local val_dec = value / obj['max']
-    
+
     setup_draw_ring(cr, val_dec, obj)
 end
 
@@ -182,13 +182,13 @@ end
 --
 function conky_main()
     if conky_window == nil then return end
-    
+
     local cs = cairo_xlib_surface_create(conky_window.display,conky_window.drawable,conky_window.visual, conky_window.width,conky_window.height)
-    local cr = cairo_create(cs)    
-    
+    local cr = cairo_create(cs)
+
     --[[
         IMPORTANT: if you are using the 'cpu' function, it will cause a segmentation fault
-        if it tries to draw a ring straight away. This if statement uses a delay to make 
+        if it tries to draw a ring straight away. This if statement uses a delay to make
         sure that this doesn't happen. Generally, a value of 5s is long enough, so if you
         update Conky every 1s, use update_num > 5.
     ]]
@@ -199,9 +199,9 @@ function conky_main()
             setup_rings(cr, rings[i])
         end
     end
-    
+
     setup_clock_hands(cr, clock_hands)
- 
+
     -- These lines do some clean up.
     -- One thing that lua can do is to eat up memory over time.
     -- These lines help to avoid that.

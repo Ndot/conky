@@ -1,6 +1,4 @@
 #!/bin/bash
 
-# Mind the relative path on the conky command.
-
-conky -c ./conky_calendar.lua &
-conky -c ./conky_main.lua &
+cd ./conky; conky -c calendar.lua &
+cd ./conky; conky -c main.lua &

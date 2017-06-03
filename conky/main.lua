@@ -23,9 +23,9 @@ conky.config = {
     uppercase = false,
 
     ----------------------------------------------------------------- LUA LOAD
-    lua_load = 'lua_script.lua',
+    lua_load = './../scripts/main.lua',
     lua_draw_hook_pre = 'conky_main',
-    
+
     ----------------------------------------------------------------- COLORS
     default_color = 'ffffff',   -- White
     color1 = '#808080',          -- Grey
@@ -52,7 +52,7 @@ ${color5}${goto 150}${font :size=12}${time %B}${color1} ${time %Y}$font
 #------------------------------------------------------------------------------ CPU
 #
 ${voffset 294}
-${goto 190}${color7}CPU 
+${goto 190}${color7}CPU
 
 ${voffset -118}
 ${color2}${goto 177}${font :size=6}${freq_g 1}${voffset 6}
@@ -68,9 +68,9 @@ ${goto 212}${mem}
 #------------------------------------------------------------------------------ VPN - ON / OFF
 #
 ${if_up tun0}
-${image vpn_ON.png -p 169,819 -s 40x40}
+${image ./../img/vpn_ON.png -p 169,819 -s 40x40}
 $else
-${image vpn_OFF.png -p 169,819 -s 40x40}
+${image ./../img/vpn_OFF.png -p 169,819 -s 40x40}
 ${endif}
 
 ]]

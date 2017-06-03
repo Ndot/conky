@@ -14,16 +14,16 @@ if [ $e1 == 0 ]
   then c=1
   elif [ $e2 == 0 ]
   then c=0
-  elif [ $e3 == 0 ] 
+  elif [ $e3 == 0 ]
   then c=1
   else c=0
 fi
 p=`date +%-m`
 # if the current year is not a leap one, c = 0
-if [ $c == 0 ] 
+if [ $c == 0 ]
   then
 	if [ $p == 2 ]
-	then b=28 # this is the number of days in Febuary 
+	then b=28 # this is the number of days in Febuary
 	elif [ $p == 11 ] || [ $p == 4 ] || [ $p == 6 ] ||  [ $p == 9 ]
 	then b=30
 	else b=31
@@ -69,7 +69,7 @@ k=`date +%u`
 j=`date +%e`
 f=`expr $j % 7`
 if [ $k -lt $f ]
-then 
+then
 	y=$[$k+8-$f]
 else
 	y=$[$k-$f+1]

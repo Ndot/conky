@@ -20,7 +20,7 @@ conky.config = {
     use_xft = true,
     font = 'SourceCodePro-Medium:size=8',
     uppercase = true,
-    
+
     ----------------------------------------------------------------- COLORS
     default_color = 'ffffff',   -- White
     color1 = '#7a7a7a',         -- Grey
@@ -31,7 +31,7 @@ conky.text = [[
 #
 #----------------------------------------------------------------------- EXEC CALENDAR
 #
-${font courier:size=12}${alignr}${execpi 300 ./horizontal_calendar.sh}$font
+${font courier:size=12}${alignr}${execpi 300 ./../scripts/horizontal_calendar.sh}$font
 #
 #----------------------------------------------------------------------- HR - HORIZONTAL LINE
 #

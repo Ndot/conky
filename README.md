@@ -2,7 +2,7 @@
 This is a simple Conky done with `Lua` and `Bash`.
 
 ### Screenshot
-![screenshot](screenshots/screenshot_01.png)
+![screenshot](img/screenshots/screenshot_01.png)
 
 ### Usage
 Simply run the `start_conky.sh` file.
