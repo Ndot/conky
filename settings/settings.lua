@@ -40,9 +40,9 @@ rings = {
         y           = clock_y,
         radius      = 135,
         thickness   = 10,
-        start_angle = 30,
-        end_angle   = 390,
-        gap_percent = 0.85,
+        start_angle = 28.5,
+        end_angle   = 388.5,
+        gap_percent = 0.9,
         line_cap    = CAIRO_LINE_CAP_BUTT
     },
     ----------------- Minutes -------------------
@@ -72,8 +72,8 @@ rings = {
         y           = clock_y,
         radius      = 150,
         thickness   = 5,
-        start_angle = 0,
-        end_angle   = 360,
+        start_angle = 6,
+        end_angle   = 366,
         gap_percent = 0.9,
         line_cap    = CAIRO_LINE_CAP_BUTT
     },
@@ -405,8 +405,10 @@ clock_hands = {
     hours_thickness     = 8,
     minutes_thickness   = 5,
     seconds_thickness   = 2,
-    -- Show seconds TRUE / FALSE
-    show_seconds        = true,
+    -- Show seconds / minutes / hours.
+    show_seconds        = false,
+    show_minutes        = false,
+    show_hours          = true,
     color               = { '#888888', 1 },
     line_cap            = CAIRO_LINE_CAP_BUTT
 }

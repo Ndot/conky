@@ -129,20 +129,24 @@ function setup_clock_hands(cr, obj)
     hours_arc = (2 * math.pi / 12) * hours + mins_arc / 12
 
     -- Draw hours hand
-    x_start = obj['x'] + obj['hours_offset'] * math.sin(hours_arc)
-    y_start = obj['y'] - obj['hours_offset'] * math.cos(hours_arc)
-    x_end   = obj['x'] + obj['hours_width'] * math.sin(hours_arc)
-    y_end   = obj['y'] - obj['hours_width'] * math.cos(hours_arc)
+    if obj['show_hours'] then
+        x_start = obj['x'] + obj['hours_offset'] * math.sin(hours_arc)
+        y_start = obj['y'] - obj['hours_offset'] * math.cos(hours_arc)
+        x_end   = obj['x'] + obj['hours_width'] * math.sin(hours_arc)
+        y_end   = obj['y'] - obj['hours_width'] * math.cos(hours_arc)
 
-    draw_line(cr, {x_start, y_start}, {x_end, y_end}, obj, obj['hours_thickness'])
+        draw_line(cr, {x_start, y_start}, {x_end, y_end}, obj, obj['hours_thickness'])
+    end
 
     -- Draw minutes hand
-    x_start = obj['x'] + obj['minutes_offset'] * math.sin(mins_arc)
-    y_start = obj['y'] - obj['minutes_offset'] * math.cos(mins_arc)
-    x_end   = obj['x'] + obj['minutes_width'] * math.sin(mins_arc)
-    y_end   = obj['y'] - obj['minutes_width'] * math.cos(mins_arc)
+    if obj['show_minutes'] then
+        x_start = obj['x'] + obj['minutes_offset'] * math.sin(mins_arc)
+        y_start = obj['y'] - obj['minutes_offset'] * math.cos(mins_arc)
+        x_end   = obj['x'] + obj['minutes_width'] * math.sin(mins_arc)
+        y_end   = obj['y'] - obj['minutes_width'] * math.cos(mins_arc)
 
-    draw_line(cr, {x_start, y_start}, {x_end, y_end}, obj, obj['minutes_thickness'])
+        draw_line(cr, {x_start, y_start}, {x_end, y_end}, obj, obj['minutes_thickness'])
+    end
 
     -- Draw seconds hand
     if obj['show_seconds'] then
