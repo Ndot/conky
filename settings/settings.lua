@@ -9,6 +9,13 @@ sys02_x = 200
 sys02_y = 850
 -- Background color
 bg_default = { '#606060', 0.2 }
+cpu_range_color = {
+    { '#fbe517', 0.6 }, 
+    { '#ff8000', 0.5 },
+    { '#ff0000', 0.5 }
+};
+bg_default_decoration = { '#606060', 0.4 }
+CPU_TEMPS = { 0, 55, 80 }
 
 rings = {
     -----------------------------------------------------------------
@@ -43,7 +50,7 @@ rings = {
         start_angle = 28.5,
         end_angle   = 388.5,
         gap_percent = 0.9,
-        line_cap    = CAIRO_LINE_CAP_BUTT
+        line_cap    = CAIRO_LINE_CAP_ROUND
     },
     ----------------- Minutes -------------------
     {
@@ -56,10 +63,10 @@ rings = {
         y           = clock_y,
         radius      = 150,
         thickness   = 10,
-        start_angle = 0,
-        end_angle   = 360,
-        gap_percent = 0,
-        line_cap    = CAIRO_LINE_CAP_BUTT
+        start_angle = 6,
+        end_angle   = 366,
+        gap_percent = 0.95,
+        line_cap    = CAIRO_LINE_CAP_ROUND
     },
     ----------------- Seconds -------------------
     {
@@ -71,11 +78,11 @@ rings = {
         x           = clock_x,
         y           = clock_y,
         radius      = 150,
-        thickness   = 5,
+        thickness   = 1,
         start_angle = 6,
         end_angle   = 366,
         gap_percent = 0.9,
-        line_cap    = CAIRO_LINE_CAP_BUTT
+        line_cap    = CAIRO_LINE_CAP_ROUND
     },
     ------------------- Days --------------------
     {
@@ -179,8 +186,8 @@ rings = {
         max         = 100,
         bg_color    = bg_default,
         fg_color    = nil,
-        range_value = { 0, 55, 60 },
-        range_color = { { '#a7ac2a', 0.5 }, { '#ff8000', 0.5 }, { '#ff0000', 0.5 } },
+        range_value = CPU_TEMPS,
+        range_color = cpu_range_color,
         x           = sys01_x,
         y           = sys01_y,
         radius      = 133,
@@ -196,8 +203,8 @@ rings = {
         max         = 100,
         bg_color    = bg_default,
         fg_color    = nil,
-        range_value = { 0, 55, 60 },
-        range_color = { { '#a7ac2a', 0.5 }, { '#ff8000', 0.5 }, { '#ff0000', 0.5 } },
+        range_value = CPU_TEMPS,
+        range_color = cpu_range_color,
         x           = sys01_x,
         y           = sys01_y,
         radius      = 133,
@@ -213,8 +220,8 @@ rings = {
         max         = 100,
         bg_color    = bg_default,
         fg_color    = nil,
-        range_value = { 0, 55, 60 },
-        range_color = { { '#a7ac2a', 0.5 }, { '#ff8000', 0.5 }, { '#ff0000', 0.5 } },
+        range_value = CPU_TEMPS,
+        range_color = cpu_range_color,
         x           = sys01_x,
         y           = sys01_y,
         radius      = 133,
@@ -230,8 +237,8 @@ rings = {
         max         = 100,
         bg_color    = bg_default,
         fg_color    = nil,
-        range_value = { 0, 55, 60 },
-        range_color = { { '#a7ac2a', 0.5 }, { '#ff8000', 0.5 }, { '#ff0000', 0.5 } },
+        range_value = CPU_TEMPS,
+        range_color = cpu_range_color,
         x           = sys01_x,
         y           = sys01_y,
         radius      = 133,
@@ -262,7 +269,7 @@ rings = {
     ------------------------------------------------------------ DISK
     {
         name        = 'fs_used_perc',
-        arg         = '/media/MAIN/',
+        arg         = '/media/main/',
         max         = 100,
         bg_color    = bg_default,
         fg_color    = { '#f40d0d', 0.2 },
@@ -335,7 +342,7 @@ rings = {
         name        = '',
         arg         = '',
         max         = 100,
-        bg_color    = { '#323232', 0.6 },
+        bg_color    = bg_default_decoration,
         x           = sys01_x,
         y           = sys01_y,
         radius      = 120,
@@ -350,7 +357,7 @@ rings = {
         name        = '',
         arg         = '',
         max         = 100,
-        bg_color    = { '#323232', 0.6 },
+        bg_color    = bg_default_decoration,
         x           = sys02_x,
         y           = sys02_y,
         radius      = 100,
@@ -362,30 +369,30 @@ rings = {
     }
 }
 
-text = {
-    -----------------------------------------------------------------
-    ------------------------------------------------------- TEXT FILE
-    {
-        path = './../textFiles/todo',
-        font_family = 'Purisa',
-        title_size = 19,
-        title_color = { '#10be7b' },
-        body_size = 11,
-        body_color = { '#ededed' },
-        x = 500,
-        y = 200
-    },
-    {
-        path = './../textFiles/shooping',
-        font_family = 'Purisa',
-        title_size = 19,
-        title_color = { '#be107b' },
-        body_size = 11,
-        body_color = { '#ededed' },
-        x = 500,
-        y = 400
-    }
-}
+-- text = {
+--     -----------------------------------------------------------------
+--     ------------------------------------------------------- TEXT FILE
+    -- {
+    --     path = './../textFiles/todo.md',
+    --     font_family = 'monospace',
+    --     title_size = 19,
+    --     title_color = { '#10be7b' },
+    --     body_size = 11,
+    --     body_color = { '#ededed' },
+    --     x = 500,
+    --     y = 200
+    -- },
+--     {
+--         path = './../textFiles/shooping',
+--         font_family = 'monospace',
+--         title_size = 19,
+--         title_color = { '#be107b' },
+--         body_size = 11,
+--         body_color = { '#ededed' },
+--         x = 50,
+--         y = 40
+--     }
+-- }
 
 clock_hands = {
     -----------------------------------------------------------------
@@ -396,19 +403,19 @@ clock_hands = {
     -- Clock pointers extent.
     hours_width         = 155,
     minutes_width       = 165,
-    seconds_width       = 180,
+    seconds_width       = 165,
     -- Clock pointers offset from center.
     hours_offset        = 128,
     minutes_offset      = 128,
-    seconds_offset      = 128,
+    seconds_offset      = 120,
     -- Line thickness.
     hours_thickness     = 8,
     minutes_thickness   = 5,
     seconds_thickness   = 2,
     -- Show seconds / minutes / hours.
-    show_seconds        = false,
+    show_seconds        = true,
     show_minutes        = false,
-    show_hours          = true,
+    show_hours          = false,
     color               = { '#888888', 1 },
     line_cap            = CAIRO_LINE_CAP_BUTT
 }
