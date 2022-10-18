@@ -230,6 +230,17 @@ function lines_from(file)
 end
 
 ---
+-- Parse lines
+--
+function parse_line(line)
+    line = line:gsub("^(%- %[%]) (%S)", "☑ %2")
+    line = line:gsub("^(%- %[ %]) (%S)", "☑ %2")
+    line = line:gsub("^(%- %[x%]) (%S)", "☐ %2")
+    
+    return line
+end
+
+---
 -- Setup to print the text files.
 --
 -- @param {} cr         - Surface to draw. (cr = cairo_create(cs) -> this creates the surface to draw).
@@ -249,6 +260,8 @@ function setup_text(cr, obj)
 
     -- For everything else
     while table.getn(file_lines) >= i do
+
+        file_lines[i] = parse_line(file_lines[i])
 
         print_text(cr, file_lines[i], obj['body_color'], obj['body_size'], obj['font_family'], x, y)
 

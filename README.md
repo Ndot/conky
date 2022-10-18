@@ -1,13 +1,17 @@
 # Conky
+
 Simple Conky done with `Lua` and `Bash`.
 
-### Screenshot
+## Screenshot
+
 ![screenshot](img/screenshots/screenshot_01.jpg)
 
 ### Usage
+
 Simply run the `start_conky.sh` file.
 
 ### Customization
+
 This conky is very customizable.
 You can add, remove or change pretty much everything just by editing the `lua_settings.lua` file.
 So if you dont like this particular Conky or its color scheme you can completely turn it around to be just as you want it to be.
@@ -15,8 +19,10 @@ So if you dont like this particular Conky or its color scheme you can completely
 To do so you can change the variables values on the rings Object, add new Objects or completely remove Objects.
 All the key value pairs are explain on the table below.
 
-# Configuration Settings
-##### Rings
+## Configuration Settings
+
+### Rings
+
 Variable | Explanation
 :--------: | -----------
 name | Name is the command to be executed by conky. This can also be a empty string for decorative rings.
@@ -35,8 +41,8 @@ end_angle | End angle of the arc in degrees.
 gap_percent | This goes from 0 to 1 and it indicates how much of one unit/section out of the max should be drawn. The higher the value the smaller the section of the arc. If this value is 0 (zero) the arc will have no sections.
 line_cap | The way the line cap is drawn. Possible values are `CAIRO_LINE_CAP_BUTT`, `CAIRO_LINE_CAP_ROUND` or `CAIRO_LINE_CAP_SQUARE`.
 
+### Text File
 
-##### Text File
 Variable | Explanation
 :--------: | -----------
 path | Path to the text file.
@@ -49,6 +55,7 @@ x | The horizontal coordinate in pixels.
 y | The vertical coordinate in pixels
 
 ### Credit Where Credit is Due
+
 Some ideas for the Lua script came from the Clock Rings script from despot77.
 The Horizontal Calendar script is pretty much untouched and came from someone that you can find at nhianho@gmail.com.
 
@@ -59,6 +66,7 @@ If you need help with Conky you can look at the official repository Wiki here:
 [https://github.com/brndnmtthws/conky/wiki](https://github.com/brndnmtthws/conky/wiki)
 
 ### A couple more things
+
 For this Conky to work you need: **`Lua`**, **`Cairo`**, **`Imlib2`**, and **`lm-sensors`**.
 
 Possible changes to `lua_settings.lua` file:
@@ -67,4 +75,5 @@ If you have a second hard drive change the value of `arg = '/media/Main/'` to th
 In case you have a different GPU (eg: AMD Graphics Card) you will need to change the values in the NVIDIA section.
 
 ### License
+
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
