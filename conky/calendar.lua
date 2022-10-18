@@ -35,7 +35,7 @@ conky.text = [[
 #--- EXEC CALENDAR ---#
 #---------------------#
 #
-${font courier:size=12}${alignr}${execpi 300 ./../scripts/horizontal_calendar.sh}$font
+${font courier:size=12}${execpi 300 ./../scripts/calendar -t "\${color green}%\${color}" -W "\${color1}%\${color}" -b "\${color2}%\${color}"}$font
 #
 #----------------------------#
 #--- HR - HORIZONTAL LINE ---#

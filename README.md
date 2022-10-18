@@ -57,7 +57,6 @@ y | The vertical coordinate in pixels
 ### Credit Where Credit is Due
 
 Some ideas for the Lua script came from the Clock Rings script from despot77.
-The Horizontal Calendar script is pretty much untouched and came from someone that you can find at nhianho@gmail.com.
 
 You can find the font **SourceCodePro-Medium** from Adobe and installation instructions here:
 [https://github.com/adobe-fonts/source-code-pro](https://github.com/adobe-fonts/source-code-pro)
